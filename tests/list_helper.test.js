@@ -101,3 +101,73 @@ describe("Favourite blog", () => {
     expect(result.name).toEqual(blogs[1].name);
   });
 });
+
+describe("Most likes", () => {
+  test("Should return bob", () => {
+    const blogs = [
+      {
+        title: "you",
+        author: "bob",
+        url: "http://allaboutbob.you",
+        likes: 10,
+      },
+      {
+        title: "you2",
+        author: "bob",
+        url: "http://allaboutbob.you2",
+        likes: 10,
+      },
+      {
+        title: "me",
+        author: "bill",
+        url: "http://allaboutbob.me",
+        likes: 10,
+      },
+      {
+        title: "them",
+        author: "jim",
+        url: "http://allaboutbob.them",
+        likes: 10,
+      },
+    ];
+
+    const result = listHelper.mostLikes(blogs);
+    expect(result.author).toEqual("bob");
+    expect(result.likes).toEqual(20);
+  });
+});
+
+describe("Most blogs", () => {
+  test("Should return bob", () => {
+    const blogs = [
+      {
+        title: "you",
+        author: "bob",
+        url: "http://allaboutbob.you",
+        likes: 10,
+      },
+      {
+        title: "you2",
+        author: "bob",
+        url: "http://allaboutbob.you2",
+        likes: 10,
+      },
+      {
+        title: "me",
+        author: "bill",
+        url: "http://allaboutbob.me",
+        likes: 10,
+      },
+      {
+        title: "them",
+        author: "jim",
+        url: "http://allaboutbob.them",
+        likes: 10,
+      },
+    ];
+
+    const result = listHelper.mostBlogs(blogs);
+    expect(result.author).toEqual("bob");
+    expect(result.blogs).toEqual(2);
+  });
+});
