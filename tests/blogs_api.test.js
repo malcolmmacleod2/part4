@@ -49,6 +49,13 @@ test("three blogs are returned", async () => {
   expect(response.body).toHaveLength(3);
 });
 
+test("blogs have property id", async () => {
+  const response = await api.get("/api/blogs");
+
+  const blog = response.body[0];
+  expect(blog.id).toBeDefined();
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
