@@ -77,6 +77,30 @@ test("can create a new blog post with no likes and that returns 0", async () => 
   expect(likes).toEqual(0);
 });
 
+test("cannot create a new blog post with no title", async () => {
+  const newBlog = {
+    author: "bob",
+    url: "http://allaboutbob.me",
+  };
+
+  await api.post("/api/blogs").send(newBlog).expect(400);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
+});
+
+test("cannot create a new blog post with no url", async () => {
+  const newBlog = {
+    title: "you4",
+    author: "bob",
+  };
+
+  await api.post("/api/blogs").send(newBlog).expect(400);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
