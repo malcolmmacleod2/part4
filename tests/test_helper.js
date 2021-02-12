@@ -16,7 +16,6 @@ const initialBlogs = [
     title: "you3",
     author: "bob",
     url: "http://allaboutbob.me",
-    likes: 0,
   },
 ];
 

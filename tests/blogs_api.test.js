@@ -56,6 +56,27 @@ test("can create a new blog post", async () => {
   expect(contents).toContain("you4");
 });
 
+test("can create a new blog post with no likes and that returns 0", async () => {
+  const newBlog = {
+    title: "you4",
+    author: "bob",
+    url: "http://allaboutbob.me",
+  };
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1);
+
+  const last = helper.initialBlogs.length;
+  const likes = blogsAtEnd[last].likes;
+  expect(likes).toEqual(0);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
