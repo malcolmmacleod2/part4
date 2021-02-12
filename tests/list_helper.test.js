@@ -97,7 +97,6 @@ describe("Favourite blog", () => {
     ];
 
     const result = listHelper.favouriteBlog(blogs);
-    console.log(result);
     expect(result.name).toEqual(blogs[1].name);
   });
 });

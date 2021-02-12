@@ -22,7 +22,6 @@ const mostBlogs = (blogs) => {
   mostAuthor = "";
 
   _.forEach(grouped, function (g, author) {
-    console.log(author);
     const total = g.length;
 
     if (total > most) {
@@ -41,7 +40,6 @@ const mostLikes = (blogs) => {
   mostAuthor = "";
 
   _.forEach(grouped, function (g, author) {
-    console.log(author);
     const total = g.map((i) => i.likes).reduce((s, t) => s + t);
 
     if (total > most) {

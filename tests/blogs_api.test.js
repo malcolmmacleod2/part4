@@ -112,6 +112,26 @@ test("a blog can be deleted", async () => {
   expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1);
 });
 
+test("a blog can be updated", async () => {
+  const blogsAtStart = await helper.blogsInDb();
+  const blogToUpdate = blogsAtStart[0];
+
+  const update = {
+    title: "you4",
+    author: "bob",
+    url: "http://allaboutme.com",
+    likes: 50,
+  };
+
+  await api.put(`/api/blogs/${blogToUpdate.id}`).send(update).expect(200);
+
+  const blogsAtEnd = await helper.blogsInDb();
+
+  expect(blogsAtEnd).toHaveLength(blogsAtStart.length);
+
+  expect(blogsAtEnd[0].likes).toEqual(update.likes);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
