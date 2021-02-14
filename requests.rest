@@ -25,3 +25,13 @@ content-type: application/json
 ###
 GET http://localhost:3003/api/users
 
+###
+
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+  "username": "malcolm",
+  "password": "passowrd2"
+}
+
