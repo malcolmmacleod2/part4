@@ -3,9 +3,10 @@ GET http://localhost:3003/api/blogs
 ###
 POST http://localhost:3003/api/blogs 
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0iLCJpZCI6IjYwMjk1YTBmYTM1Zjk2MTA5MDMxN2FlYSIsImlhdCI6MTYxMzMzMTEzOX0.bn_vfX5B8VjnJ8LwEdvpwNVkTR0n8F6ZQZ4HyW2IsKw
 
 {
-  "title": "you5",
+  "title": "you6",
   "author": "bob5",
   "url": "http://allaboutbob.me",
   "likes": 10
