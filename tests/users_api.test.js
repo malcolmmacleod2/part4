@@ -92,13 +92,13 @@ describe("a user should not be created", () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length);
   });
 
-  test("when name is not given", async () => {
+  test("when password is not given", async () => {
     const usersAtStart = await helper.usersInDb();
 
     const newUser = {
       username: "Jim",
-      name: null,
-      password: "salainen",
+      name: "dfs",
+      password: null,
     };
 
     const result = await api
@@ -107,7 +107,7 @@ describe("a user should not be created", () => {
       .expect(400)
       .expect("Content-Type", /application\/json/);
 
-    expect(result.body.error).toContain("Path `name` is required");
+    expect(result.body.error).toContain("password missing");
 
     const usersAtEnd = await helper.usersInDb();
     expect(usersAtEnd).toHaveLength(usersAtStart.length);
@@ -136,13 +136,13 @@ describe("a user should not be created", () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length);
   });
 
-  test("when name is too short", async () => {
+  test("when password is too short", async () => {
     const usersAtStart = await helper.usersInDb();
 
     const newUser = {
       username: "abce",
       name: "Ma",
-      password: "salainen",
+      password: "sa",
     };
 
     const result = await api
@@ -151,9 +151,7 @@ describe("a user should not be created", () => {
       .expect(400)
       .expect("Content-Type", /application\/json/);
 
-    expect(result.body.error).toContain(
-      "shorter than the minimum allowed length"
-    );
+    expect(result.body.error).toContain("password too short");
 
     const usersAtEnd = await helper.usersInDb();
     expect(usersAtEnd).toHaveLength(usersAtStart.length);
