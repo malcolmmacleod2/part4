@@ -5,8 +5,23 @@ POST http://localhost:3003/api/blogs
 content-type: application/json
 
 {
-  "title": "you",
-  "author": "bob",
+  "title": "you5",
+  "author": "bob5",
   "url": "http://allaboutbob.me",
   "likes": 10
 }
+
+###
+
+POST http://localhost:3003/api/users
+content-type: application/json
+
+{
+  "username": "malcolm",
+  "name": "malcolm macleod",
+  "password": "passowrd2"
+}
+
+###
+GET http://localhost:3003/api/users
+
