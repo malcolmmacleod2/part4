@@ -8,6 +8,8 @@ const api = supertest(app);
 
 const User = require("../models/user");
 
+let token = "";
+
 describe("when there is initially one user in db", () => {
   beforeEach(async () => {
     await User.deleteMany({});
@@ -16,6 +18,14 @@ describe("when there is initially one user in db", () => {
     const user = new User({ username: "root", name: "first", passwordHash });
 
     await user.save();
+
+    const login = {
+      username: "root",
+      password: "sekret",
+    };
+
+    const response = await api.post("/api/login").send(login);
+    token = response.body.token;
   });
 
   test("creation succeeds with a fresh username", async () => {
@@ -30,6 +40,7 @@ describe("when there is initially one user in db", () => {
     await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(200)
       .expect("Content-Type", /application\/json/);
 
@@ -52,10 +63,13 @@ describe("when there is initially one user in db", () => {
     await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(200)
       .expect("Content-Type", /application\/json/);
 
-    const response = await api.get("/api/users");
+    const response = await api
+      .get("/api/users")
+      .set({ Authorization: `bearer ${token}` });
 
     expect(response.body).toHaveLength(2);
   });
@@ -69,6 +83,14 @@ describe("a user should not be created", () => {
     const user = new User({ username: "root", name: "first", passwordHash });
 
     await user.save();
+
+    const login = {
+      username: "root",
+      password: "sekret",
+    };
+
+    const response = await api.post("/api/login").send(login);
+    token = response.body.token;
   });
 
   test("when username is not given", async () => {
@@ -83,6 +105,7 @@ describe("a user should not be created", () => {
     const result = await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(400)
       .expect("Content-Type", /application\/json/);
 
@@ -104,6 +127,7 @@ describe("a user should not be created", () => {
     const result = await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(400)
       .expect("Content-Type", /application\/json/);
 
@@ -125,6 +149,7 @@ describe("a user should not be created", () => {
     const result = await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(400)
       .expect("Content-Type", /application\/json/);
 
@@ -148,6 +173,7 @@ describe("a user should not be created", () => {
     const result = await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(400)
       .expect("Content-Type", /application\/json/);
 
@@ -169,6 +195,7 @@ describe("a user should not be created", () => {
     const result = await api
       .post("/api/users")
       .send(newUser)
+      .set({ Authorization: `bearer ${token}` })
       .expect(400)
       .expect("Content-Type", /application\/json/);
 

@@ -40,7 +40,24 @@ blogsRouter.post("/", async (request, response) => {
 });
 
 blogsRouter.delete("/:id", async (request, response) => {
+  const blog = await Blog.findById(request.params.id).populate("User");
+
+  if (!blog) {
+    return response.status(404).json({
+      error: "blog not found",
+    });
+  }
+
+  const user = await User.findById(request.token.id);
+
+  if (blog.user._id.toString() !== user._id.toString()) {
+    return response.status(401).json({
+      error: "Unauthorized",
+    });
+  }
+
   await Blog.findByIdAndRemove(request.params.id);
+
   response.status(204).end();
 });
 
