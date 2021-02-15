@@ -1,5 +1,10 @@
 GET http://localhost:3003/api/blogs
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0iLCJpZCI6IjYwMjk1YTBmYTM1Zjk2MTA5MDMxN2FlYSIsImlhdCI6MTYxMzM0MTg4MH0.eoc0cCsS-rlMOEZHYEE2arxp0Bpd4KhifO1ZNLXa-Kw
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0zIiwiaWQiOiI2MDI5YTZjMGY4ODk5MjFkMjIzYTUyMzQiLCJpYXQiOjE2MTM0MTY4NDd9.4eLeeKv-ssnDT034X55rsIrAEqNHWskse1UzE-EAZZc
+
+###
+
+DELETE http://localhost:3003/api/blogs/601efc89ade44b02155ece45
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0iLCJpZCI6IjYwMjk1YTBmYTM1Zjk2MTA5MDMxN2FlYSIsImlhdCI6MTYxMzM0MjIwNn0.6eVuV3DFoSzHrDYW6FnHbBnefisZJiyK-bhjPFjo7OU
 
 
 ###
@@ -18,15 +23,21 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hb
 
 POST http://localhost:3003/api/users
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0iLCJpZCI6IjYwMjk1YTBmYTM1Zjk2MTA5MDMxN2FlYSIsImlhdCI6MTYxMzM0MjIwNn0.6eVuV3DFoSzHrDYW6FnHbBnefisZJiyK-bhjPFjo7OU
+
 
 {
-  "username": "malcolm",
-  "name": "malcolm macleod",
-  "password": "passowrd2"
+  "username": "malcolm3",
+  "name": "malcolm3 macleod3",
+  "password": "passowrd23"
 }
+
+
 
 ###
 GET http://localhost:3003/api/users
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0zIiwiaWQiOiI2MDI5YTZjMGY4ODk5MjFkMjIzYTUyMzQiLCJpYXQiOjE2MTM0MTYyODJ9.GPs67p2BdHhsCeAcGCqZjpP1d80hrTmS5MVOShp6kfA
+
 
 ###
 
@@ -34,7 +45,23 @@ POST http://localhost:3003/api/login
 content-type: application/json
 
 {
-  "username": "malcolm",
-  "password": "passowrd2"
+  "username": "malcolm3",
+  "password": "passowrd23"
 }
 
+###
+
+POST http://localhost:3003/api/blogs 
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0zIiwiaWQiOiI2MDI5YTZjMGY4ODk5MjFkMjIzYTUyMzQiLCJpYXQiOjE2MTMzNDI0NTF9.HT9jLEOeI62_IXRKWPim1T77ONarDacV7SWw7K7VbU8
+
+{
+  "title": "me again",
+  "author": "bob5",
+  "url": "http://allaboutbob.me",
+  "likes": 10
+}
+
+###
+DELETE http://localhost:3003/api/blogs/6029bcf2b7a0c1638b510ae
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGNvbG0zIiwiaWQiOiI2MDI5YTZjMGY4ODk5MjFkMjIzYTUyMzQiLCJpYXQiOjE2MTM0MTY4NDd9.4eLeeKv-ssnDT034X55rsIrAEqNHWskse1UzE-EAZZc
