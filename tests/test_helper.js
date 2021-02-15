@@ -31,8 +31,17 @@ const usersInDb = async () => {
   return users.map((user) => user.toJSON());
 };
 
+const updateBlogWithUser = async (blog, user) => {
+  blogToUpdate = await Blog.findById(blog.id);
+  userToUse = await User.findById(user.id);
+
+  blogToUpdate.user = userToUse.id;
+  await blogToUpdate.save();
+};
+
 module.exports = {
   initialBlogs,
   blogsInDb,
   usersInDb,
+  updateBlogWithUser,
 };
