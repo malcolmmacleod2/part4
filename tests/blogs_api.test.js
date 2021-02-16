@@ -135,9 +135,27 @@ test("cannot create a new blog post with no url", async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
 });
 
+test("cannot create a new blog post with no authorized user", async () => {
+  const newBlog = {
+    title: "you4",
+    author: "bob",
+  };
+
+  await api.post("/api/blogs").send(newBlog).expect(401);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
+});
+
 test("a blog can be deleted", async () => {
+  const usersAtStart = await helper.usersInDb();
+  const userToUse = usersAtStart[0];
+  console.log(userToUse);
+
   const blogsAtStart = await helper.blogsInDb();
   const blogToDelete = blogsAtStart[0];
+
+  await helper.updateBlogWithUser(blogToDelete, userToUse);
 
   await api
     .delete(`/api/blogs/${blogToDelete.id}`)
