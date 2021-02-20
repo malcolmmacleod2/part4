@@ -33,7 +33,8 @@ app.use(middleware.requestLogger);
 
 app.use("/api/login", loginRouter);
 
-app.use(middleware.tokenExtractor);
+app.post("/api/blogs", middleware.tokenExtractor);
+app.delete("/api/blogs/:id", middleware.tokenExtractor);
 
 app.use("/api/blogs", blogsRouter);
 app.use("/api/users", usersRouter);
